@@ -220,6 +220,8 @@ if(NOT AMLOGIC_FOUND AND NOT BROADCOM-OMX_FOUND AND NOT MMAL_FOUND AND NOT FREES
   message(FATAL_ERROR "No video output available")
 endif()
 
+target_sources(moonlight PRIVATE ./src/audio/fs.c ./src/video/fs.c)
+
 configure_file("./src/configuration.h.in" "${PROJECT_BINARY_DIR}/configuration.h")
 
 set_property(TARGET moonlight PROPERTY COMPILE_DEFINITIONS ${MOONLIGHT_DEFINITIONS})

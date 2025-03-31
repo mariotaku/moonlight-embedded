@@ -34,3 +34,4 @@ bool audio_pulse_init(char* audio_device);
 #ifdef __FreeBSD__
 extern AUDIO_RENDERER_CALLBACKS audio_callbacks_oss;
 #endif
+extern AUDIO_RENDERER_CALLBACKS audio_callbacks_filesystem;

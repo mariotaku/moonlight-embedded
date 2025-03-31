@@ -57,6 +57,7 @@ static struct option long_options[] = {
   {"mapping", required_argument, NULL, 'k'},
   {"nosops", no_argument, NULL, 'l'},
   {"audio", required_argument, NULL, 'm'},
+  {"video", required_argument, NULL, 'M'},
   {"localaudio", no_argument, NULL, 'n'},
   {"config", required_argument, NULL, 'o'},
   {"platform", required_argument, NULL, 'p'},
@@ -181,6 +182,9 @@ static void parse_argument(int c, char* value, PCONFIGURATION config) {
     break;
   case 'm':
     config->audio_device = value;
+    break;
+  case 'M':
+    config->video_device = value;
     break;
   case 'n':
     config->localaudio = true;
@@ -370,6 +374,7 @@ void config_parse(int argc, char* argv[], PCONFIGURATION config) {
   config->address = NULL;
   config->config_file = NULL;
   config->audio_device = NULL;
+  config->video_device = NULL;
   config->sops = true;
   config->localaudio = false;
   config->fullscreen = true;

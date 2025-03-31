@@ -101,6 +101,8 @@ enum platform platform_check(char* name) {
 
   if (strcmp(name, "fake") == 0)
     return FAKE;
+  if (strcmp(name, "filesystem") == 0)
+    return FILESYSTEM;
 
   return 0;
 }
@@ -140,6 +142,8 @@ void platform_stop(enum platform system) {
 
 DECODER_RENDERER_CALLBACKS* platform_get_video(enum platform system) {
   switch (system) {
+  case FILESYSTEM:
+      return &decoder_callbacks_filesystem;
   #ifdef HAVE_X11
   case X11:
     return &decoder_callbacks_x11;
@@ -184,6 +188,8 @@ AUDIO_RENDERER_CALLBACKS* platform_get_audio(enum platform system, char* audio_d
   switch (system) {
   case FAKE:
       return NULL;
+  case FILESYSTEM:
+      return &audio_callbacks_filesystem;
   #ifdef HAVE_SDL
   case SDL:
     return &audio_callbacks_sdl;
@@ -251,6 +257,8 @@ char* platform_name(enum platform system) {
     return "SDL2 (software decoding)";
   case FAKE:
     return "Fake (no a/v output)";
+  case FILESYSTEM:
+    return "Filesystem (no a/v output)";
   default:
     return "Unknown";
   }
